@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { API_KEY } from "./.env";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import "./App.css";
 
@@ -12,9 +12,7 @@ function App() {
     const [graphs, setGraphs] = useState(null);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if (weatherInfos) parseWeatherInfos();
-    }, [weatherInfos]);
+    useEffect(parseWeatherInfos, [weatherInfos]);
 
     // api call to openweathermap to get the forecast
     function getWeather(event) {
@@ -28,7 +26,6 @@ function App() {
             .then((res) => res.json())
             .then(
                 (result) => {
-                    console.log("getting infos");
                     if (result.cod === "404") setError(result.message);
                     setWeatherInfos(result.list);
                 },
@@ -45,6 +42,7 @@ function App() {
 
     // parse weatherInfos to get all the data that we need for the charts
     function parseWeatherInfos() {
+        if (!weatherInfos) return;
         let data = {
             temperature: [],
             pressure: [],
@@ -74,7 +72,6 @@ function App() {
     function renderWeatherGraphs(data, date) {
         setGraphs(
             Object.keys(data).map((key) => {
-                console.log(key);
                 const graphData = {
                     labels: date,
                     datasets: [
