@@ -18,7 +18,7 @@ function App() {
     function getWeather(event) {
         event.preventDefault();
         fetch(
-            "http://api.openweathermap.org/data/2.5/forecast?q=" +
+            "https://api.openweathermap.org/data/2.5/forecast?q=" +
                 city +
                 "&appid=" +
                 API_KEY
