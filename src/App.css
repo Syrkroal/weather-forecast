@@ -10,13 +10,13 @@
 }
 
 .graphContainer {
-    height: 500px;
+    height: 300px;
     width: 500px;
     margin: 10px;
 }
 
 .graphs {
-    margin: 20px;
+    padding: 20px;
     /* border: 2px solid black; */
     display: flex;
     flex-flow: row wrap;

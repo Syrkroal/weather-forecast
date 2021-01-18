@@ -6,6 +6,15 @@ import "./App.css";
 
 const K = -273.15;
 
+const colors = {
+    temperature: "rgba(99,132,255,1)",
+    pressure: "rgba(132,255,99,1)",
+    humidity: "rgba(255,99,132,1)",
+    windSpeed: "rgba(244,255,69,1)",
+    windDir: "rgba(255,173,69,1)",
+    precipitation: "rgba(80,69,255,1)",
+};
+
 function App() {
     const [city, setCity] = useState("");
     const [weatherInfos, setWeatherInfos] = useState(null);
@@ -26,8 +35,9 @@ function App() {
             .then((res) => res.json())
             .then(
                 (result) => {
+                    console.log(result);
                     if (result.cod === "404") setError(result.message);
-                    setWeatherInfos(result.list);
+                    else setWeatherInfos(result.list);
                 },
                 (error) => {
                     console.log("error", error);
@@ -77,11 +87,12 @@ function App() {
                     datasets: [
                         {
                             label: key,
-                            backgroundColor: "rgba(255,99,132,0.2)",
-                            borderColor: "rgba(255,99,132,1)",
+                            backgroundColor: colors[key].slice(0, -2) + "0.2)",
+                            borderColor: colors[key],
                             borderWidth: 1,
-                            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                            hoverBorderColor: "rgba(255,99,132,1)",
+                            hoverBackgroundColor:
+                                colors[key].slice(0, -2) + "0.4)",
+                            hoverBorderColor: colors[key],
                             data: data[key],
                         },
                     ],
